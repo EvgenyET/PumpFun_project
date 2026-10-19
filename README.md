@@ -1,44 +1,140 @@
-# PumpFun_project
+# Аналитика токенов Pump.Fun: три модуля
 
-Исследовательский комплекс для работы с продвигаемыми токенами DexScreener. Он обнаруживает токены, собирает рыночные показатели и свечи, сохраняет историю и проверяет торговые правила в симуляторе. Для просмотра и подбора параметров предусмотрены отдельные окна PyQt5.
+Рабочее название: `PumpFun_project`.
+
+Проект объединяет три настольных модуля на Python для анализа токенов Pump.Fun в сети Solana. «История цен» собирает данные, «Оптимизатор стратегий» проверяет правила на сохранённой истории, а «Симулятор стратегий» наблюдает за токенами и ведёт виртуальные сделки. Каждый модуль имеет собственный интерфейс и запускается отдельно.
 
 **Python-портфолио Евгения Толмачева** · Python · PyQt5 · pyqtgraph · DexScreener API · GeckoTerminal API · JSONL
 
-![Интерфейс PumpFun_project](docs/preview.webp)
+<img src="docs/screenshots/optimizer/1.jpg" alt="Скриншот 1" width="860">
+
+## Скриншоты
+
+<details>
+<summary>Оптимизатор стратегий - 11 снимков</summary>
+
+### Скриншот 1
+
+<img src="docs/screenshots/optimizer/1.jpg" alt="Скриншот 1" width="860">
+
+### Скриншот 2
+
+<img src="docs/screenshots/optimizer/2.jpg" alt="Скриншот 2" width="860">
+
+### Скриншот 3
+
+<img src="docs/screenshots/optimizer/3.jpg" alt="Скриншот 3" width="860">
+
+### Скриншот 4
+
+<img src="docs/screenshots/optimizer/4.jpg" alt="Скриншот 4" width="860">
+
+### Скриншот 7
+
+<img src="docs/screenshots/optimizer/7.jpg" alt="Скриншот 7" width="860">
+
+### Скриншот 8
+
+<img src="docs/screenshots/optimizer/8.jpg" alt="Скриншот 8" width="860">
+
+### Скриншот 9
+
+<img src="docs/screenshots/optimizer/9.jpg" alt="Скриншот 9" width="860">
+
+### Скриншот 10
+
+<img src="docs/screenshots/optimizer/10.jpg" alt="Скриншот 10" width="860">
+
+### Скриншот 11
+
+<img src="docs/screenshots/optimizer/11.jpg" alt="Скриншот 11" width="860">
+
+### Скриншот 12
+
+<img src="docs/screenshots/optimizer/12.jpg" alt="Скриншот 12" width="860">
+
+### Скриншот 13
+
+<img src="docs/screenshots/optimizer/13.jpg" alt="Скриншот 13" width="860">
+
+</details>
+
+<details>
+<summary>История цен - 5 снимков</summary>
+
+### Скриншот 1
+
+<img src="docs/screenshots/history/1.jpg" alt="Скриншот 1" width="860">
+
+### Скриншот 2
+
+<img src="docs/screenshots/history/2.jpg" alt="Скриншот 2" width="860">
+
+### Скриншот 3
+
+<img src="docs/screenshots/history/3.jpg" alt="Скриншот 3" width="860">
+
+### Скриншот 4
+
+<img src="docs/screenshots/history/4.jpg" alt="Скриншот 4" width="860">
+
+### Скриншот 5
+
+<img src="docs/screenshots/history/5.jpg" alt="Скриншот 5" width="860">
+
+</details>
+
+<details>
+<summary>Симулятор стратегий - 5 снимков</summary>
+
+### Скриншот 1
+
+<img src="docs/screenshots/simulator/1.jpg" alt="Скриншот 1" width="860">
+
+### Скриншот 2
+
+<img src="docs/screenshots/simulator/2.jpg" alt="Скриншот 2" width="860">
+
+### Скриншот 3
+
+<img src="docs/screenshots/simulator/3.jpg" alt="Скриншот 3" width="860">
+
+### Скриншот 4
+
+<img src="docs/screenshots/simulator/4.jpg" alt="Скриншот 4" width="860">
+
+### Скриншот 5
+
+<img src="docs/screenshots/simulator/5.jpg" alt="Скриншот 5" width="860">
+
+</details>
 
 ## Возможности
 
-- Обнаруживает токены Solana из списка продвижений DexScreener и фильтрует их по рыночным параметрам.
-- Сохраняет метаданные и историю цены, загружает свечи GeckoTerminal с повторными попытками и ограничением частоты запросов.
-- Симулирует несколько стратегий с учётом комиссии, проскальзывания и уровней выхода.
-- Проверяет правила входа сразу после обнаружения или после просадки; перебирает параметры на истории.
-- Показывает сводные результаты, отдельные сделки и график выбранного токена.
+- Сбор и обновление истории токенов через DexScreener и GeckoTerminal.
+- Проверка правил входа и выхода и подбор параметров на исторических данных.
+- Мониторинг и параллельная симуляция нескольких стратегий с учётом комиссии и проскальзывания.
+- Просмотр графиков, открытых позиций и результатов отдельных сделок.
 
 ## Как устроен проект
 
-### Мониторинг и симулятор
-
-[`boost_main.py`](boost_main.py), [`common_dsx.py`](common_dsx.py)
-
-Главное окно получает токены через Worker, ведёт наблюдение и обновляет состояния симулируемых стратегий.
-
-### История и свечи
-
-[`price_history_app.py`](price_history_app.py), [`candle_engine.py`](candle_engine.py)
-
-Собирают и сохраняют историю, догружают свечи, ограничивают частоту запросов и показывают прогресс.
-
-### Проверка стратегий
+### Оптимизатор стратегий
 
 [`strategy_optimizer.py`](strategy_optimizer.py)
 
-DataLoader читает историю, Backtester моделирует сделки, а OptimizerWorker перебирает параметры.
+DataLoader читает историю, Backtester моделирует сделки, OptimizerWorker перебирает параметры. Таблицы результатов и ChartWindow позволяют изучить отдельный запуск.
 
-### Графики и детали
+### История цен
 
-[`price_history_app.py`](price_history_app.py), [`strategy_optimizer.py`](strategy_optimizer.py)
+[`price_history_app.py`](price_history_app.py), [`candle_engine.py`](candle_engine.py)
 
-Окна просмотра позволяют исследовать токен, отдельную сделку и результаты выбранного набора параметров.
+PriceHistoryApp управляет интерфейсом и таблицами. CandleService в candle_engine.py координирует пакетную загрузку и Live-поток; окна HistoryWindow и CandleChartWindow показывают данные.
+
+### Симулятор стратегий
+
+[`boost_main.py`](boost_main.py), [`common_dsx.py`](common_dsx.py)
+
+MainWindow в boost_main.py связывает мониторинг, настройки и симуляцию. Worker и CustomTableModel из common_dsx.py загружают данные и обновляют таблицы; JSON хранит состояние и журналы.
 
 ## Технологии и их роль
 
@@ -49,7 +145,8 @@ DataLoader читает историю, Backtester моделирует сдел
 
 ## С чего начать просмотр кода
 
-Три основные точки входа - boost_main.py, price_history_app.py и strategy_optimizer.py. Классы Backtester и CandleService показывают вычислительную часть и работу с внешними данными.
+
+Код разделён по трём модулям: strategy_optimizer.py - оптимизатор, price_history_app.py и candle_engine.py - история цен, boost_main.py и common_dsx.py - мониторинг и симулятор. В карточке каждого модуля можно открыть только относящиеся к нему файлы.
 
 ## Подготовка и запуск
 
@@ -82,7 +179,8 @@ python boost_main.py
 ```text
 PumpFun_project/
 ├── docs/
-│   └── preview.webp
+│   ├── preview.webp
+│   └── screenshots/  # скриншоты из портфолио
 ├── .env.example
 ├── .gitignore
 ├── boost_main.py
@@ -102,6 +200,6 @@ PumpFun_project/
 
 ## Состав репозитория
 
-Сохранены авторские исходники, их имена и структура, зависимости и компактный скриншот. Рабочие базы, наборы данных, модели и виртуальные окружения исключены. Секреты заменены обозначениями `YOUR_...` / `REDACTED_...`; реальные значения задаются локально. Исходные алгоритмы при оформлении портфолио не перерабатывались.
+Сохранены авторские исходники, их имена и структура, зависимости и скриншоты интерфейса. Рабочие базы, наборы данных, модели и виртуальные окружения исключены. Секреты заменены обозначениями `YOUR_...` / `REDACTED_...`; реальные значения задаются локально. Исходные алгоритмы при оформлении портфолио не перерабатывались.
 
 Автор: [Евгений Толмачев](https://github.com/EvgenyET) · [Портфолио](https://evgeny.tech/)
